@@ -1,30 +1,40 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+<h2>Node env : {{nodeenv}}</h2>
+<h2>base url : {{baseurl}}</h2>
+<h2>coba env: {{cobaenv}}</h2>
   <router-view/>
 </template>
+<script>
+import { onMounted, computed } from 'vue'
+export default {
+  name: 'app',
+  setup () {
+    const nodeenv = computed(() => {
+      return process.env.NODE_ENV
+    })
+    const baseurl = computed(() => {
+      return process.env.VUE_APP_BASE_URL
+    })
+    const cobaenv = computed(() => {
+      return process.env.VUE_APP_RISANO
+    })
+    onMounted(() => {
+      console.log('node_env', process.env.NODE_ENV)
+      console.log('BASE_URL', process.env.BASE_URL)
+    })
+    return {
+      nodeenv,
+      baseurl,
+      cobaenv
+    }
+  }
+}
+</script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body, html{
+  padding: 0px;
+  margin: 0px;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
